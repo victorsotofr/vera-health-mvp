@@ -47,7 +47,7 @@ export default function HomePage() {
     setView("results");
 
     try {
-      const res = await fetch("http://localhost:8000/classify", {
+      const res = await fetch("https://vera-health-mvp-production.up.railway.app/classify", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
