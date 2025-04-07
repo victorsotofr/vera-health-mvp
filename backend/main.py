@@ -11,10 +11,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://vera-health-mvp-soto.vercel.app",  # ✅ no trailing slash!
-        "http://localhost:3000",                    # ✅ allow local dev too
-    ],
+    allow_origins=["https://vera-health-mvp-soto.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
