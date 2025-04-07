@@ -8,6 +8,7 @@ Built with **FastAPI**, **LangChain**, **OpenAI**, **ChromaDB** (Backend) and **
 
 ## 🔧 Project Structure
 
+```bash
 vera-health-mvp/
 ├── backend/                     # FastAPI backend
 │   ├── main.py                  # Classification endpoint
@@ -34,7 +35,7 @@ vera-health-mvp/
 ├── README.md
 ├── requirements.txt            # Python backend dependencies
 └── package.json                # Frontend dependencies
-
+```
 
 ---
 
@@ -55,7 +56,6 @@ git clone https://github.com/your-username/vera-health-mvp.git
 cd vera-health-mvp
 
 ### BACKEND
-
 cd backend
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt
@@ -67,7 +67,6 @@ python rag/embed_guidelines.py
 uvicorn main:app --reload
 
 ### FRONTEND
-
 cd frontend
 npm install
 npm run dev
