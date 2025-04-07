@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function HomePage() {
   const [note, setNote] = useState("");
@@ -127,10 +128,13 @@ export default function HomePage() {
           <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
             <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md text-center border">
               {/* Logo */}
-              <img
+              <Image
                 src="/LogoVeraHealth.png"
-                alt="Vera Health Logo"
-                className="h-12 mx-auto mb-6 object-contain"
+                alt="Vera Health"
+                width={150}
+                height={40}
+                priority
+                className="mx-auto mb-6"
               />
 
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
