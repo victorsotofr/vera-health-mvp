@@ -130,7 +130,7 @@ export default function HomePage() {
               <img
                 src="/LogoVeraHealth.png"
                 alt="Vera Health Logo"
-                className="w-20 h-20 mx-auto mb-4"
+                className="h-12 mx-auto mb-6 object-contain"
               />
 
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
