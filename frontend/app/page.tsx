@@ -18,8 +18,6 @@ export default function HomePage() {
 
   useEffect(() => {
 
-    localStorage.removeItem("openai_api_key");
-
     const key = sessionStorage.getItem("openai_api_key");
     if (!key) {
       setShowApiKeyWarning(true);
