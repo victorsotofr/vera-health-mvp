@@ -28,6 +28,7 @@ export default function HomePage() {
     const prefilled = localStorage.getItem("prefilled_note");
     if (prefilled) {
       setNote(prefilled);
+      localStorage.removeItem("prefilled_note"); 
     }
   }, []);
 

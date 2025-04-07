@@ -9,7 +9,8 @@ import os
 
 app = FastAPI()
 
-origins = os.getenv("ALLOW_ORIGINS", "").split(",") if os.getenv("ALLOW_ORIGINS") else ["*"]
+origins = ["https://vera-health-mvp-soto.vercel.app"]
+print("✅ CORS ALLOWED ORIGINS:", origins)
 
 app.add_middleware(
     CORSMiddleware,
