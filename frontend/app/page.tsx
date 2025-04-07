@@ -143,6 +143,16 @@ export default function HomePage() {
               </h2>
               <p className="text-sm text-gray-500 mb-6">
                 This key is required to analyze your clinical note securely using GPT.
+                <br />
+                You can create or retrieve one from{" "}
+                <a
+                  href="https://platform.openai.com/api-keys"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  OpenAI’s API Key page
+                </a>.
               </p>
 
               <input
