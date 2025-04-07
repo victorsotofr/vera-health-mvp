@@ -11,8 +11,6 @@ app = FastAPI()
 
 origins = os.getenv("ALLOW_ORIGINS", "").split(",") if os.getenv("ALLOW_ORIGINS") else ["*"]
 
-
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
