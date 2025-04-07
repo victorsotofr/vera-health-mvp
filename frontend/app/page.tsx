@@ -29,12 +29,11 @@ export default function HomePage() {
     const prefilled = localStorage.getItem("prefilled_note");
     if (prefilled) {
       setNote(prefilled);
-      localStorage.removeItem("prefilled_note");
     }
   }, []);
 
   async function handleSubmit() {
-    const apiKey = localStorage.getItem("openai_api_key");
+    const apiKey = sessionStorage.getItem("openai_api_key");
     if (!apiKey) {
       setShowApiKeyWarning(true);
       setApiKeyModalOpen(true);
@@ -69,12 +68,12 @@ export default function HomePage() {
   }
 
   function handleApiKeySave() {
-    localStorage.setItem("openai_api_key", apiKeyTemp);
+    sessionStorage.setItem("openai_api_key", apiKeyTemp);
     setApiKeyModalOpen(false);
     setShowApiKeyWarning(false);
     setApiKeySavedMessage(true);
     setTimeout(() => setApiKeySavedMessage(false), 3000);
-  }
+  }  
 
   return (
     <main className="min-h-screen bg-white font-sans text-gray-800 relative">
