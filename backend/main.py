@@ -1,17 +1,21 @@
+from rag.retriever import get_relevant_guidelines
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, ValidationError
 from typing import List, Optional
 from openai import OpenAI
 import json
-
-from rag.retriever import get_relevant_guidelines
+import os
 
 app = FastAPI()
 
+origins = os.getenv("ALLOW_ORIGINS", "").split(",") if os.getenv("ALLOW_ORIGINS") else ["*"]
+
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://vera-health-mvp-soto.vercel.app"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
