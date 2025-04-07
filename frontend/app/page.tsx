@@ -125,25 +125,42 @@ export default function HomePage() {
 
         {apiKeyModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded shadow-xl w-full max-w-md">
-              <h2 className="text-lg font-semibold mb-2">Enter your OpenAI API Key</h2>
+            <div className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md text-center border">
+              {/* Logo */}
+              <img
+                src="/LogoVeraHealth.png"
+                alt="Vera Health Logo"
+                className="w-20 h-20 mx-auto mb-4"
+              />
+
+              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                Enter your OpenAI API Key
+              </h2>
+              <p className="text-sm text-gray-500 mb-6">
+                This key is required to analyze your clinical note securely using GPT.
+              </p>
+
               <input
                 type="password"
                 placeholder="sk-..."
-                className="w-full border p-2 rounded"
+                className="w-full border border-gray-300 p-3 rounded mb-4 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 onChange={(e) => setApiKeyTemp(e.target.value)}
               />
-              <div className="mt-4 flex justify-end gap-2">
-                <button
-                  onClick={handleApiKeySave}
-                  className="px-4 py-2 bg-blue-600 text-white rounded"
-                >
-                  Save
-                </button>
-              </div>
+
+              <Button
+                onClick={handleApiKeySave}
+                className="w-full bg-[#1C65BD] hover:bg-[#0D2E57]"
+              >
+                Save & Continue
+              </Button>
+
+              <p className="mt-4 text-xs text-gray-400">
+                Your key is stored only for the current session.
+              </p>
             </div>
           </div>
         )}
+
 
         {!result && (
           <Textarea
