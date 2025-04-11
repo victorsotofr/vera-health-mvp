@@ -84,24 +84,23 @@ pip install -r requirements.txt
 ---
 
 ## 🔑 Usage
-Paste a clinical note or load a mock template
+1. Visit the [Vera Health - E/M Classifier Website](https://vera-health-mvp-soto.vercel.app/) - DON'T FORGET to equip yourself with an [OpenAI API Key](https://platform.openai.com/api-keys).
 
-Enter your OpenAI API key when prompted
+2. You can either:
+   - Try 1 of our Templates.
+   - Analyze one of your clinical notes.
 
-Click “Analyze E/M Level” to get:
 
-Suggested E/M code
+Once you click “Analyze E/M Level”, you will get:
+- The suggested E/M code.
+- The MDM breakdown (COPA, Data, Risk).
+- Additional CPTs.
+- Documentation gaps.
 
-MDM breakdown (COPA, Data, Risk)
-
-Additional CPTs
-
-Documentation gaps
-
-Optionally view document source & guideline context
+You can optionally view document source & guideline context.
 
 ---
 
 ## Credits
 Personal project
-Built by Victor Soto for Vera Health
+Built by Victor Soto for [Vera Health](https://www.vera-health.ai/) :)
