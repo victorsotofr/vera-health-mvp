@@ -2,6 +2,8 @@
 
 AI-powered emergency medicine documentation assistant that classifies clinical notes based on AMA 2023 and ACEP guidelines. 
 
+[Vera Health - E/M Classifier](https://vera-health-mvp-soto.vercel.app/)
+
 Built with **FastAPI**, **LangChain**, **OpenAI**, **ChromaDB** (Backend) and **Next.js**, **Tailwind CSS** (Frontend).
 
 ---
