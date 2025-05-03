@@ -13,8 +13,9 @@ export default function NewAnalysis() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [showApiKeyWarning, setShowApiKeyWarning] = useState(false);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+
   const scrollRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/");
@@ -33,12 +34,6 @@ export default function NewAnalysis() {
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [result]);
-
-  useEffect(() => {
-    if (result && textareaRef.current) {
-      textareaRef.current.style.height = "140px";
     }
   }, [result]);
 
@@ -106,6 +101,58 @@ export default function NewAnalysis() {
                   <h2 className="text-lg font-semibold text-[#1C65BD]">🧠 Medical Decision Making</h2>
                   <p><strong>Level:</strong> {result.mdm.level || "n.a."}</p>
                   <p className="text-sm text-gray-700 whitespace-pre-wrap">{result.mdm.justification}</p>
+
+                  <div className="border-t pt-4 space-y-3 text-sm text-gray-800">
+                    <div>
+                      <strong>🩺 Problems (COPA):</strong> {result.mdm.copa.level} — {Math.round(result.mdm.copa.confidence * 100)}%
+                      <p className="text-gray-600">{result.mdm.copa.explanation}</p>
+                    </div>
+                    <div>
+                      <strong>📊 Data:</strong> {result.mdm.data.level} — {Math.round(result.mdm.data.confidence * 100)}%
+                      <p className="text-gray-600">{result.mdm.data.explanation}</p>
+                    </div>
+                    <div>
+                      <strong>⚠️ Risk:</strong> {result.mdm.risk.level} — {Math.round(result.mdm.risk.confidence * 100)}%
+                      <p className="text-gray-600">{result.mdm.risk.explanation}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {result.cpt_codes?.length > 0 && (
+                <div className="bg-white border rounded-xl p-6 shadow space-y-4">
+                  <h2 className="text-lg font-semibold text-[#1C65BD]">🧾 Additional CPT Codes</h2>
+                  <ul className="space-y-2 text-sm">
+                    {result.cpt_codes.map((code: any, idx: number) => (
+                      <li key={idx} className="border rounded p-3 bg-gray-50">
+                        <p><strong>Code:</strong> {code.code}</p>
+                        <p><strong>Confidence:</strong> {Math.round(code.confidence * 100)}%</p>
+                        <p className="text-gray-600">{code.description}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {result.documentation_gaps && (
+                <div className="bg-green-50 border rounded-xl p-6 shadow">
+                  <h2 className="text-lg font-semibold text-[#1C65BD]">📝 Documentation Gaps</h2>
+                  {result.documentation_gaps.length === 0 ? (
+                    <p className="text-sm text-green-700">✅ No documentation gaps detected.</p>
+                  ) : (
+                    <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
+                      {result.documentation_gaps.map((gap: string, idx: number) => (
+                        <li key={idx}>{gap}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              )}
+
+              {result.retrieved_guidelines && (
+                <div className="bg-blue-50 border p-4 rounded-md text-sm shadow">
+                  <h2 className="text-md font-semibold text-[#1C65BD] mb-2">📚 Guideline Snippets</h2>
+                  <pre className="whitespace-pre-wrap text-gray-700">{result.retrieved_guidelines}</pre>
                 </div>
               )}
             </div>
@@ -135,19 +182,17 @@ export default function NewAnalysis() {
             disabled={loading || !note.trim()}
             className="absolute bottom-3 right-3 px-4 py-2 bg-[#1C65BD] hover:bg-[#0D2E57] text-white text-sm rounded-lg"
           >
-            {loading ? "..." : "Send"}
+            {loading ? (
+              <div className="flex items-center space-x-2">
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                <span>Sending</span>
+              </div>
+            ) : (
+              "Send"
+            )}
           </Button>
         </div>
       </form>
-
-      {loading && (
-        <div className="fixed inset-0 bg-white bg-opacity-80 z-50 flex items-center justify-center">
-          <div className="flex flex-col items-center space-y-4">
-            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-sm text-gray-700">Analyzing your documentation...</p>
-          </div>
-        </div>
-      )}
     </main>
   );
 }
