@@ -83,7 +83,7 @@ export default function NewAnalysis() {
 
   return (
     <main className="flex flex-col h-screen">
-      <div className="flex-1 overflow-y-auto px-6 py-8 pb-[200px] flex justify-center">
+      <div className="flex-1 overflow-y-auto px-6 py-8 pb-[300px] flex justify-center">
         <div className="w-full max-w-4xl space-y-6">
           <h1 className="text-2xl font-semibold mb-2">〈...〉E/M Classification Assistant</h1>
 
