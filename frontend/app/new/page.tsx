@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
 
 export default function NewAnalysis() {
   const { data: session, status } = useSession();
@@ -13,15 +12,12 @@ export default function NewAnalysis() {
   const [note, setNote] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
-  const [isExpanded, setIsExpanded] = useState(false);
   const [showApiKeyWarning, setShowApiKeyWarning] = useState(false);
-
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/");
-    }
+    if (status === "unauthenticated") router.push("/");
   }, [status, router]);
 
   useEffect(() => {
@@ -30,16 +26,19 @@ export default function NewAnalysis() {
       setNote(storedNote);
       localStorage.removeItem("prefilled_note");
     }
-
     const key = sessionStorage.getItem("openai_api_key");
-    if (!key) {
-      setShowApiKeyWarning(true);
-    }
+    if (!key) setShowApiKeyWarning(true);
   }, []);
 
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [result]);
+
+  useEffect(() => {
+    if (result && textareaRef.current) {
+      textareaRef.current.style.height = "140px";
     }
   }, [result]);
 
@@ -52,7 +51,6 @@ export default function NewAnalysis() {
 
     setLoading(true);
     setResult(null);
-    setIsExpanded(false);
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classify`, {
@@ -126,6 +124,7 @@ export default function NewAnalysis() {
       >
         <div className="relative w-full max-w-4xl">
           <Textarea
+            ref={textareaRef}
             placeholder="Paste your clinical note here..."
             value={note}
             onChange={(e) => setNote(e.target.value)}
@@ -140,6 +139,15 @@ export default function NewAnalysis() {
           </Button>
         </div>
       </form>
+
+      {loading && (
+        <div className="fixed inset-0 bg-white bg-opacity-80 z-50 flex items-center justify-center">
+          <div className="flex flex-col items-center space-y-4">
+            <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <p className="text-sm text-gray-700">Analyzing your documentation...</p>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
