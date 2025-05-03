@@ -186,7 +186,7 @@ export default function NewAnalysis() {
               )}
             </div>
           )}
-
+          <div className="h-[140px]" />
           <div ref={scrollRef} />
         </div>
       </div>
