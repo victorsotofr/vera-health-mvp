@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider, useSession, signOut } from "next-auth/react";
+import React, { useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,12 +12,14 @@ function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  if (status === "loading") return null;
+  useEffect(() => {
+    if (!session && status !== "loading" && pathname !== "/") {
+      router.push("/");
+    }
+  }, [session, status, pathname, router]);
 
-  if (!session && pathname !== "/") {
-    router.push("/");
-    return null;
-  }
+  if (status === "loading") return null;
+  if (!session && pathname !== "/") return null;
 
   return (
     <>
@@ -86,10 +89,9 @@ function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
                 ⇥ Sign Out
               </button>
               <div className="text-xs text-gray-400 text-center">
-                Built with 🤍 for Vera Health.
+                Built with 🩵 for Vera Health.
               </div>
             </div>
-
           </aside>
 
           <main className="flex-1 overflow-y-auto">{children}</main>

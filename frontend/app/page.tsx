@@ -111,7 +111,7 @@ export default function Home() {
           <a href="https://www.vera-health.ai" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
             <span className="sr-only">Vera Health</span>
             <span className="text-sm text-gray-500">
-              Built with 🤍 for <span className="underline">Vera Health</span>.
+              Built with 🩵 for <span className="underline">Vera Health</span>.
             </span>
           </a>
         </div>
