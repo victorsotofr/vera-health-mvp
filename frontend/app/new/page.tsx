@@ -13,6 +13,7 @@ export default function NewAnalysis() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<any>(null);
   const [showApiKeyWarning, setShowApiKeyWarning] = useState(false);
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   const scrollRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -46,6 +47,7 @@ export default function NewAnalysis() {
 
     setLoading(true);
     setResult(null);
+    setExpandedSections({});
 
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/classify`, {
@@ -61,12 +63,20 @@ export default function NewAnalysis() {
 
       const data = await res.json();
       setResult(data);
+      setNote(""); // Reset the textarea after submission
     } catch (err) {
       alert("Error connecting to the classification service.");
     } finally {
       setLoading(false);
     }
   }
+
+  const toggleSection = (section: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [section]: !prev[section]
+    }));
+  };
 
   if (status === "loading") return <div>Loading...</div>;
   if (!session) return null;
@@ -92,7 +102,7 @@ export default function NewAnalysis() {
           {result && (
             <div className="space-y-6">
               <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 shadow">
-                <h2 className="text-lg font-semibold text-[#1C65BD] mb-2">💡 Suggested E/M Level</h2>
+                <h2 className="text-lg font-semibold text-[#1C65BD] mb-2">➤ Suggested E/M Level</h2>
                 <p className="text-2xl font-bold text-gray-900">{result.suggested_em_level || "n.a."}</p>
               </div>
 
@@ -121,7 +131,7 @@ export default function NewAnalysis() {
 
               {result.cpt_codes?.length > 0 && (
                 <div className="bg-white border rounded-xl p-6 shadow space-y-4">
-                  <h2 className="text-lg font-semibold text-[#1C65BD]">🧾 Additional CPT Codes</h2>
+                  <h2 className="text-lg font-semibold text-[#1C65BD]">✛ Additional CPT Codes</h2>
                   <ul className="space-y-2 text-sm">
                     {result.cpt_codes.map((code: any, idx: number) => (
                       <li key={idx} className="border rounded p-3 bg-gray-50">
@@ -136,9 +146,9 @@ export default function NewAnalysis() {
 
               {result.documentation_gaps && (
                 <div className="bg-green-50 border rounded-xl p-6 shadow">
-                  <h2 className="text-lg font-semibold text-[#1C65BD]">📝 Documentation Gaps</h2>
+                  <h2 className="text-lg font-semibold text-[#1C65BD]">Documentation Gaps</h2>
                   {result.documentation_gaps.length === 0 ? (
-                    <p className="text-sm text-green-700">✅ No documentation gaps detected.</p>
+                    <p className="text-sm text-green-700">✓ No documentation gaps detected.</p>
                   ) : (
                     <ul className="list-disc pl-5 space-y-1 text-sm text-gray-700">
                       {result.documentation_gaps.map((gap: string, idx: number) => (
@@ -150,9 +160,28 @@ export default function NewAnalysis() {
               )}
 
               {result.retrieved_guidelines && (
-                <div className="bg-blue-50 border p-4 rounded-md text-sm shadow">
-                  <h2 className="text-md font-semibold text-[#1C65BD] mb-2">📚 Guideline Snippets</h2>
-                  <pre className="whitespace-pre-wrap text-gray-700">{result.retrieved_guidelines}</pre>
+                <div className="bg-blue-50 border rounded-xl p-6 shadow">
+                  <button
+                    onClick={() => toggleSection('guidelines')}
+                    className="w-full flex items-center justify-between text-left"
+                  >
+                    <h2 className="text-lg font-semibold text-[#1C65BD]">Guideline Snippets</h2>
+                    <svg
+                      className={`w-5 h-5 transform transition-transform ${
+                        expandedSections['guidelines'] ? 'rotate-180' : ''
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  {expandedSections['guidelines'] && (
+                    <pre className="mt-4 whitespace-pre-wrap text-sm text-gray-700">
+                      {result.retrieved_guidelines}
+                    </pre>
+                  )}
                 </div>
               )}
             </div>
@@ -175,7 +204,7 @@ export default function NewAnalysis() {
             placeholder="Paste your clinical note here..."
             value={note}
             onChange={(e) => setNote(e.target.value)}
-            className="w-full min-h-[140px] max-h-[50vh] rounded-2xl pr-20 pl-4 py-3 border border-gray-300 shadow-md resize-y text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full min-h-[140px] max-h-[50vh] rounded-xl pr-20 pl-4 py-3 border border-gray-300 shadow-sm resize-y text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <Button
             type="submit"
@@ -185,7 +214,7 @@ export default function NewAnalysis() {
             {loading ? (
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span>Sending</span>
+                <span>Analyzing...</span>
               </div>
             ) : (
               "Send"

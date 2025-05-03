@@ -68,7 +68,7 @@ export default function Settings() {
             <div className="flex items-center space-x-4">
               <Button onClick={handleSave}>Save API Key</Button>
               {saved && (
-                <span className="text-green-600 text-sm">✓ API Key saved</span>
+                <span className="text-green-600 text-sm">✓ API Key Saved.</span>
               )}
             </div>
 
