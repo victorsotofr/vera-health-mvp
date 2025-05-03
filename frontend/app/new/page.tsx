@@ -83,7 +83,7 @@ export default function NewAnalysis() {
 
   return (
     <main className="flex flex-col h-screen">
-      <div className="flex-1 overflow-y-auto px-6 py-8 flex justify-center">
+      <div className="flex-1 overflow-y-auto px-6 py-8 pb-[200px] flex justify-center">
         <div className="w-full max-w-4xl space-y-6">
           <h1 className="text-2xl font-semibold mb-2">〈...〉E/M Classification Assistant</h1>
 
@@ -108,7 +108,7 @@ export default function NewAnalysis() {
 
               {result.mdm && (
                 <div className="bg-gray-50 border rounded-xl p-6 shadow space-y-4">
-                  <h2 className="text-lg font-semibold text-[#1C65BD]">🧠 Medical Decision Making</h2>
+                  <h2 className="text-lg font-semibold text-[#1C65BD]">Medical Decision Making</h2>
                   <p><strong>Level:</strong> {result.mdm.level || "n.a."}</p>
                   <p className="text-sm text-gray-700 whitespace-pre-wrap">{result.mdm.justification}</p>
 
