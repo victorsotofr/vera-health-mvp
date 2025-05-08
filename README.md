@@ -51,4 +51,4 @@ You can optionally view document source & guideline context.
 
 ## Credits
 
-Built by Victor Soto for [Vera Health](https://www.vera-health.ai/).
+by soto for [Vera Health](https://www.vera-health.ai/).
