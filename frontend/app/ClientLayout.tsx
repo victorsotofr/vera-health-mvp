@@ -63,19 +63,19 @@ function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
                     href="/templates"
                     className="block px-3 py-2 rounded hover:bg-blue-100 text-sm font-medium"
                   >
-                    ❏ Templates
+                    ⌟ Templates
                   </Link>
                   <Link
                     href="/references"
                     className="block px-3 py-2 rounded hover:bg-blue-100 text-sm font-medium"
                   >
-                    ➤ References
+                    ⌟ References
                   </Link>
                   <Link
                     href="/settings"
                     className="block px-3 py-2 rounded hover:bg-blue-100 text-sm font-medium"
                   >
-                    ⌟ Settings
+                    Settings
                   </Link>
                 </nav>
               </div>

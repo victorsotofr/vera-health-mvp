@@ -11,20 +11,20 @@ export function Navbar() {
   }
 
   return (
-    <nav className="bg-white border-b">
+    <nav className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-end h-16">
           <div className="flex items-center">
             <Button
               variant="ghost"
               onClick={() => signIn("google", { callbackUrl: "/new" })}
-              className="text-gray-700 hover:text-gray-900"
+              className="text-gray-900 hover:text-gray-600 font-semibold text-base sm:text-lg transition-colors"
             >
-              Sign In
+              ⇥ Sign In
             </Button>
           </div>
         </div>
       </div>
     </nav>
   );
-} 
+}

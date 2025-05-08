@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative isolate">
+      <div className="relative isolate h-screen flex items-center">
         <div className="mx-auto max-w-7xl px-6 py-12 sm:py-16 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <Image
@@ -28,14 +28,13 @@ export default function Home() {
               className="mx-auto mb-8"
             />
             <h1 className="text-5xl sm:text-6xl font-semibold tracking-tight text-gray-900 leading-tight mb-6">
-              <span className="block">Autonomous</span>
-              <span className="bg-gradient-to-br font-bold from-[#49c3ff] to-[#0077ff] text-transparent bg-clip-text">
+              <span className="block">
+                Autonomous
+                </span>
+              <span className="bg-gradient-to-br font-bold from-[#49c3ff] to-[#0077ff] text-transparent bg-clip-text text-4xl sm:text-5xl">
                 E/M Classification Assistant
               </span>              
             </h1>
-            <p className="mt-4 text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
-              Automate your E/M coding with AI-powered insights.
-            </p>
 
             {/* Animated Scroll Arrow */}
             <div className="mt-16 flex justify-center">
@@ -59,10 +58,13 @@ export default function Home() {
       <div id="features" className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:text-center">
-            <p className="mt-2 text-3xl font-semibold tracking-tight text-gray-900 sm:text-4xl">
-              Everything you need to code efficiently
-            </p>
-          </div>
+              <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Quick and Accurate E/M Classification.
+              </p>
+              <p className="mt-2 text-3xl font-light tracking-tight text-gray-900 sm:text-4xl">
+                Get your E/M level in seconds.
+              </p>
+            </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
               <div className="flex flex-col">
@@ -117,7 +119,7 @@ export default function Home() {
         </div>
         <div className="mt-8 md:order-1 md:mt-0">
           <p className="text-center text-xs leading-5 text-gray-500">
-            &copy; 2025 Victor Soto. All rights reserved.
+            &copy; 2025 Victor Soto.
           </p>
         </div>
       </div>
